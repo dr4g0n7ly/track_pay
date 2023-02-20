@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+const cors = require('cors')
+
 const express = require('express')
 const app = express()
 
@@ -13,14 +15,21 @@ const MAX_AGE = 1000 * 60 * 60 * 3
 const PORT = process.env.PORT || 3500
 
 mongoose.Promise = global.Promise
-mongoose.connect(process.env.DATABASE_URI, {
-    useNewUrlPArser: true,
-    useUnifiedTopology: true
-})
+try {
+    mongoose.connect(process.env.DATABASE_URI, {
+        useNewUrlPArser: true,
+        useUnifiedTopology: true
+    })
+    console.log('connected to MongoDB')
+} catch (err) {
+    console.log("error connecting to MongoDB")
+    console.log(err)
+}
+
 
 const mongoDBstore = new MongoDBStore({
     uri: process.env.DATABASE_URI,
-    collection: 'mySessions',
+    collection: 'Sessions',
 })
 
 app.use(
