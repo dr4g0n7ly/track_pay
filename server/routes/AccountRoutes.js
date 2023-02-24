@@ -9,26 +9,20 @@ router.get('/getaccounts', async (req, res) => {
 
     const user = await UserSchema.findOne({ email })
 
-    const accountIDs =  user.accounts.map((account) => { 
-        return account
-    })
 
-    const accountDets = accountIDs.map((ID) => {
-        AccountSchema.findById(ID, (err, dets) => {
-            if (err){
-                console.log(err)
-            }
-            else{
-                console.log(dets)
-            }
-        })   
-    })
-  
-    res.json(accountDets)
+    const accounts = await Promise.all(
+        user.accounts.map(async (accountID) => {
+            console.log(accountID)
+            const account = await AccountSchema.findById(accountID).exec()
+            return account
+        })
+    )
+    
+    res.json(accounts)
 
 })
 
-router.post('/addaccounts', async (req, res) => {
+router.post('/addaccount', async (req, res) => {
     const { email, name, digits, balance} = req.body
 
     if (!email) {
@@ -40,10 +34,23 @@ router.post('/addaccounts', async (req, res) => {
         return res.status(400).json({ msg: 'Email-ID not valid'})
     }
 
-    // if (user.accounts.includes(name)) {
-    //     return res.status(400).json({ msg: 'Account name already used'})
-    // }
+    const accounts = await Promise.all(
+        user.accounts.map(async (accountID) => {
+            const account = await AccountSchema.findById(accountID, 'name').exec()
+            return account
+        })
+    )
 
+    var x = false
+    accounts.map((account) => {
+        if (account.name === name) { 
+            x = true
+        }
+    })
+    if (x === true) {
+        return res.status(400).json({ msg: "Account name already used"}) 
+    }
+    
     const newAccount = new AccountSchema({ name, digits, balance })
     const savedAccountRes = await newAccount.save()
 

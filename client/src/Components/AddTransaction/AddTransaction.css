@@ -13,6 +13,22 @@
     font-size: 64px;
 }
 
+.type-button {
+    color: #f0f0f0;
+    background-color: transparent;
+    border: 1px solid #f0f0f0;
+    width: 180px;
+    margin-left: 10px;
+}
+
+.type-button-active1 {
+    background-color: beige;
+}
+
+.type-button-active2 {
+    background-color: orange;
+}
+
 /* .rs {
     margin-top: 40px ;
 } */

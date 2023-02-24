@@ -12,10 +12,18 @@ const AddTransaction = () => {
     const [amount, setAmount] = useState(0)
     const [validAmount, setValidAmount] = useState(false)
 
+    const [style1, setStyle1] = useState('type-button')
+    const [style2, setStyle2] = useState('type-button')
+    const [type, setType] = useState('')
+
     useEffect(() => {
         const result = NUMBER_REGEX.test(amount)
         setValidAmount(result)
     }, [amount])
+
+    const handleClick1 = () => {
+        setStyle
+    }
 
     return (
         <section>
@@ -63,11 +71,10 @@ const AddTransaction = () => {
                     <div className="row">
 
                         <div className="col">
-                            <label htmlFor="account" className="label">random text field:</label>
+                            <label htmlFor="account" className="label">Type:</label>
                             <br/>
-                            <input
-                                type="text"
-                            />
+                            <button className={style} onClick={handleClick1}>Expense</button>
+                            <button className={style} onClick={handleClick2}>Income</button>
                         </div>
 
                         
