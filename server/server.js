@@ -10,7 +10,7 @@ mongoose.set('strictQuery', true)
 
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
-const MAX_AGE = 1000 * 60 * 60 * 3
+const MAX_AGE = 1000 * 20
 
 const PORT = process.env.PORT || 3500
 

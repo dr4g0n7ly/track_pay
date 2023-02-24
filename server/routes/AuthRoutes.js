@@ -3,6 +3,10 @@ const bcrypt = require('bcrypt')
 const express = require('express')
 const router = express.Router()
 
+router.get('/register', (req, res) => {
+  return res.json({ msg: 'Sign up page'})
+})
+
 router.post('/register', async (req, res) => {
     const { name, email, password } = req.body
 
