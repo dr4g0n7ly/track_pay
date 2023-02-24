@@ -10,6 +10,8 @@ const PWD_REGEX = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,16}$/
 
 const Register = () => {
 
+    const [user, setUser] = useState()
+
     const [name, setName] = useState('')
 
     const [email, setEmail] = useState('')
@@ -36,6 +38,16 @@ const Register = () => {
         setValidMatch(check) 
     }, [password, match])
 
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('user-email');
+        if (loggedInUser) {
+            console.log(loggedInUser)
+            setUser(loggedInUser)
+        } else {
+            setUser()
+        }
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -56,8 +68,18 @@ const Register = () => {
             toast(data.msg)
 
             if (!res.ok) {
-                return console.log('fetch error')
+                return console.log('res not ok - fetch error')
             }
+
+            const resUser = JSON.stringify(data.userSession.email)
+            console.log(resUser)
+
+            const diff = 180 // 2 minute sessionds
+            const curDateObj = new Date();
+            const expDateObj = new Date(curDateObj.getTime() + diff*60000);
+
+            localStorage.setItem('user-email', resUser)
+            localStorage.setItem('expiry',expDateObj)
 
             setEmail('')
             setPassword('')
@@ -66,9 +88,31 @@ const Register = () => {
             setSuccess(true)
 
             return
+
         } catch (error) {
+            console.log(error)
             return console.log('fetch error')
         }
+    }
+
+    const handleLogout = () => {
+        setUser({});
+        setEmail("");
+        setPassword("");
+        localStorage.clear();
+
+        window.location.reload(false);
+    };
+
+
+    if (user) {
+        return (
+            <div>
+                <h1>User Logged in</h1>
+                <button onClick={handleLogout}>Log out</button>
+            </div>
+            
+        )
     }
 
     return (
