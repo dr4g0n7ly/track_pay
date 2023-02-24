@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../../Sidebar/Sidebar'
+import AddAccount from "../../Accounts/AddAccount";
 import '../Auth.css'
 
 const EMAIL_REGEX = /(.+)@(.+){2,}\.(.+){2,}/
@@ -87,7 +88,9 @@ const Register = () => {
 
             setSuccess(true)
 
-            return
+            return (
+                <AddAccount/>
+            )
 
         } catch (error) {
             console.log(error)
@@ -104,14 +107,12 @@ const Register = () => {
         window.location.reload(false);
     };
 
-
     if (user) {
         return (
             <div>
                 <h1>User Logged in</h1>
                 <button onClick={handleLogout}>Log out</button>
             </div>
-            
         )
     }
 

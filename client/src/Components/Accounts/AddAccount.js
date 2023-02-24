@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react"
 import Sidebar from "../Sidebar/Sidebar"
-
+import Login from "../Auth/Login/Login"
+import Accounts from "./Accounts"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './AddAccount.css'
 
 const AddAccount = () => {
+
+    const [user, setUser] = useState()
 
     const [accName, setAccName] = useState('Account 1')
     const [digits, setDigits] = useState()
     const [validDigits, setValidDigits] = useState(false)
     const [balance, setBalance] = useState()
 
-    // useEffect(() => {
-    //     const result = digits.length === 4
-    //     setValidDigits(result)
-    // }, [digits])
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('user-email');
+        if (loggedInUser) {
+            console.log(loggedInUser)
+            setUser(loggedInUser)
+        } else {
+            setUser()
+        }
+    }, []);
 
     const handleBalanceChange = (e) => {
         if (e.target.value.length !== 4) {
@@ -24,11 +34,55 @@ const AddAccount = () => {
         setDigits(e.target.value)
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        try {
+            const res = await fetch('/accounts/addaccount', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: user,
+                    name: accName,
+                    digits: digits,
+                    balance: balance
+                }),
+            })
+
+            const data = await res.json()
+            toast(data.msg)
+
+            if (!res.ok) {
+                return console.log('res not ok - fetch error')
+            }
+
+            setAccName('')
+            setDigits('')
+            setBalance()
+
+            return (
+                <Accounts/>
+            )
+
+        } catch (err) {
+            console.log(err)
+            return console.log('fetch error')
+        }
+    }
+
+    if (!user) {
+        return (
+            <Login/>
+        )
+    }
+
     return (
         <div>
+            <ToastContainer/>
             <h1>Add account</h1>
-            
-            <form>
+            <form onSubmit={handleSubmit}>
 
                 <label htmlFor="accname" className="label">Enter account name:</label>
                 <br/>

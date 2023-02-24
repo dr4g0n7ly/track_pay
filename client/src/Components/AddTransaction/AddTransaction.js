@@ -22,7 +22,11 @@ const AddTransaction = () => {
     }, [amount])
 
     const handleClick1 = () => {
-        setStyle
+
+    }
+
+    const handleClick2 = () => {
+        
     }
 
     return (
@@ -73,8 +77,8 @@ const AddTransaction = () => {
                         <div className="col">
                             <label htmlFor="account" className="label">Type:</label>
                             <br/>
-                            <button className={style} onClick={handleClick1}>Expense</button>
-                            <button className={style} onClick={handleClick2}>Income</button>
+                            <button className={style1} onClick={handleClick1}>Expense</button>
+                            <button className={style2} onClick={handleClick2}>Income</button>
                         </div>
 
                         
