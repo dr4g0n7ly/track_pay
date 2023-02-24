@@ -22,11 +22,30 @@ img {
     margin-left: 10px;  
 }
 
-.iconp {
-    margin-left: 22px;
-    padding-top: 200px;
+.icon {
+    filter: brightness(70%);
 }
 
 .icon:hover {
     filter: brightness(300%);
 } 
+
+.active-icon {
+    filter: brightness(300%);
+}
+
+.iconp {
+    filter: brightness(80%);
+    margin-left: 22px;
+    padding-top: 200px;
+}
+
+.iconp:hover {
+    filter: brightness(300%);
+}
+
+.active-iconp {
+    filter: brightness(300%);
+    margin-left: 22px;
+    padding-top: 200px;
+}

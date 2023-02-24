@@ -190,7 +190,7 @@ const Register = () => {
                     </span>
                 </p>
             </form>
-        <Sidebar/>
+        <Sidebar icon="profile"/>
         </div>
     )
 }

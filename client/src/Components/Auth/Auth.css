@@ -1,5 +1,5 @@
 body {
-    margin: 40px 100px 0px 200px;
+    margin: 40px 100px 0px 150px;
     font-family: 'Work Sans', sans-serif;
     color:rgb(200, 200, 200);
     background-color: #171717;
@@ -62,7 +62,7 @@ button {
 }
 
 button:disabled {
-    background-color: #c7c7c7;
+    background-color: #8e8e8e;
 }
 
 button:hover:enabled {
