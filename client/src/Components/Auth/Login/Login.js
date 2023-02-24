@@ -7,8 +7,8 @@ import '../Auth.css'
 
 const Login = () => {
 
-    const dNow = new Date()
-    const expiry = localStorage.getItem('expiry')
+    const dNow = Date.parse(new Date())
+    const expiry = Date.parse(localStorage.getItem('expiry'))
     console.log("now:" + dNow)
     console.log("expiry:" + expiry)
     if (expiry < dNow) {
@@ -59,7 +59,7 @@ const Login = () => {
             const resUser = JSON.stringify(data.userSession.email)
             console.log(resUser)
 
-            const diff = 0.2 // 2 minute sessionds
+            const diff = 180 // 2 minute sessionds
             const curDateObj = new Date();
             const expDateObj = new Date(curDateObj.getTime() + diff*60000);
 
@@ -69,7 +69,7 @@ const Login = () => {
             setEmail('')
             setPassword('')
 
-            // window.location.reload(false);
+            window.location.reload(false);
 
             return
         } catch (error) {
@@ -102,7 +102,7 @@ const Login = () => {
     
 
     return (
-                <div>
+        <div>
             <ToastContainer />
             <h1>Log in</h1>
             <form onSubmit={handleSubmit}>
@@ -142,7 +142,7 @@ const Login = () => {
                     </span>
                 </p>
             </form>
-        <Sidebar/>
+            <Sidebar/>
         </div>
     )
 }
