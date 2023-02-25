@@ -98,9 +98,9 @@ const Accounts = () => {
                 })
     
                 const data = await res.json()
-                console.log("data: ", data)
                 setTransactions(data.transactions)
-    
+                console.log("transactions: ", transactions.length)
+
                 if (!res.ok) {
                     console.log('res not ok - fetch error')
                 }
@@ -135,13 +135,29 @@ const Accounts = () => {
         )
     }
 
+    const Transactions = () => {
+        if (transactions.length === 0) {
+            console.log("length = 0")
+            return (
+                <div>
+                    <p>Looks like you dont have any transactions</p>
+                    <p>Add a new transaction</p>
+                </div>
+            )
+        } else {
+            return (
+                <p>We have transactions</p>
+            )
+        }
+    }
+
     return (
         <div>
             <h1 className="acc-h1">Accounts</h1>
             <div className="account-cards">
                 {accounts.map((acc)=>{
                     return (
-                    <AccountCard acc={acc} name={acc.name} digits={acc.digits} balance={acc.balance} id={acc.id} onClick={() => acchandleClick(acc)}/>
+                    <AccountCard acc={acc} name={acc.name} digits={acc.digits} balance={acc.balance} id={acc.id}/>
                 );})}
             </div>
             <Link to="/addaccount" className="new-link">
@@ -151,6 +167,7 @@ const Accounts = () => {
             <Sidebar icon="2"/>
 
             <h2 className="trans-h2">Transactions</h2>
+            <Transactions/>
         </div>
     )
 }

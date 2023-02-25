@@ -2,6 +2,5 @@ edit & delete user
 edit & delete Accounts
 
 add transactions
-
 show transactions
 edit and delete transactions

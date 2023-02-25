@@ -39,11 +39,11 @@ router.post('/gettransactions', async (req, res) => {
 
     console.log(transactions)
 
-    return res.json({ msg:"fetched account transactions successfully"})
+    return res.json({ msg:"fetched account transactions successfully", transactions})
 })
 
 router.post('/addtransactions', async (req, res) => {
-    
+
 })
 
 module.exports = router

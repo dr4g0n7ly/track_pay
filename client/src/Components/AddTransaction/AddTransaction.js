@@ -22,11 +22,15 @@ const AddTransaction = () => {
     }, [amount])
 
     const handleClick1 = () => {
-        
+        setStyle1('type-button-active-1')
+        setStyle2('type-button')
+        setType('Expense')
     }
 
     const handleClick2 = () => {
-        
+        setStyle1('type-button')
+        setStyle2('type-button-active-2')
+        setType('Income')
     }
 
     return (
@@ -77,8 +81,15 @@ const AddTransaction = () => {
                         <div className="col">
                             <label htmlFor="account" className="label">Type:</label>
                             <br/>
-                            <button className={style1} onClick={handleClick1}>Expense</button>
-                            <button className={style2} onClick={handleClick2}>Income</button>
+                            <div className="type-holder">
+                                <div className={style1} onClick={handleClick1}>
+                                    <p className="type-text">Expense</p>
+                                </div>
+                                <div className={style2} onClick={handleClick2}>
+                                    <p className="type-text">Income</p>
+                                </div>
+                            </div>
+                            
                         </div>
                         
 
