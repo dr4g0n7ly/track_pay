@@ -18,15 +18,20 @@ router.post('/gettransactions', async (req, res) => {
         return res.status(400).json({ msg: "Invalid account ID"})
     }
 
+    console.log("reqAccount: ", reqAccount)
+
     const accounts = await Promise.all(
         user.accounts.map(async (accountID) => {
-            console.log(accountID)
             const account = await AccountSchema.findById(accountID).exec()
             return account
         })
     )
 
-    // need to check if accounts contains reqAccount
+    console.log("accounts: ", accounts)
+
+    if (! reqAccount in accounts ) {
+        return res.status(400).json({ msg: "Account ID not matching user accounts"})
+    }
 
     const transactions = await Promise.all(
         user.account.map(async (transactionID) => {
@@ -35,6 +40,8 @@ router.post('/gettransactions', async (req, res) => {
             return transaction
         })
     )
+
+    console.log(transactions)
 
     return res.json({ msg:"fetched account transactions successfully", transactions})
 })
