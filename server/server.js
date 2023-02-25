@@ -56,6 +56,7 @@ app.use(express.json())
 
 app.use('/auth', require('./routes/AuthRoutes'))
 app.use('/accounts', require('./routes/AccountRoutes'))
+app.use('/transactions', require('./routes/TransactionRoutes'))
 
 app.listen(PORT, () => { console.log(`Server running on Port ${PORT}`)})
 

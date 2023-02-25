@@ -9,10 +9,11 @@ import editIcon from "../../public/edit.png"
 import './Accounts.css'
 
 const Accounts = () => {
-
+    
     const [user, setUser] = useState()
     const [accounts, setAccounts] = useState([])
     const [selectedAccount, setSelectedAccount] = useState('')
+    const [transactions, setTransactions] = useState([])
 
     useEffect( () => {
 
@@ -53,7 +54,6 @@ const Accounts = () => {
                 console.log('fetch error')
             }
         }
-    
         getUserAccounts()
     // 
     }, [user])
@@ -76,10 +76,43 @@ const Accounts = () => {
             card.classList.remove('selected-card')
         })
 
-        console.log("clicked")
-        console.log(acc)
-
         setSelectedAccount(acc)
+
+        const getAccountTransactions = async () => {
+
+            try {
+                const userEmail = user.replace(/['"]+/g, '')
+                const accID = selectedAccount._id
+
+                const res = await fetch('/transactions/gettransactions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: userEmail,
+                        accout: accID,
+                    }),
+                })
+    
+                const data = await res.json()
+                console.log("data: ", data)
+                setTransactions(data.transactions)
+    
+                if (!res.ok) {
+                    console.log('res not ok - fetch error')
+                }
+
+                else {
+                    console.log('successfully fetched account transactions')
+                } 
+    
+            } catch (err) {
+                console.log(err)
+                console.log('fetch error')
+            }
+        }
+        getAccountTransactions()
     }
     
     const AccountCard = (props) => {
@@ -114,6 +147,8 @@ const Accounts = () => {
                 <p className="add-text">Create new Account?</p>
             </Link>
             <Sidebar icon="2"/>
+
+            <h2 className="trans-h2">Transactions</h2>
         </div>
     )
 }

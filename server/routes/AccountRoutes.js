@@ -18,7 +18,6 @@ router.post('/getaccounts', async (req, res) => {
     )
 
     return res.json({ msg:"fetched all accounts successfully", accounts})
-
 })
 
 router.post('/addaccount', async (req, res) => {
