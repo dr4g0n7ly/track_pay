@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Sidebar from "../Sidebar/Sidebar"
 import Login from "../Auth/Login/Login"
-import Accounts from "./Accounts"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './AddAccount.css'

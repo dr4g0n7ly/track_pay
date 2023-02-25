@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import addIcon from "../../public/newAccount.png"
 import Sidebar from "../Sidebar/Sidebar";
-import AccountCard from "./AccountCard"
 import Login from "../Auth/Login/Login";
+import editIcon from "../../public/edit.png"
 
 import './Accounts.css'
 
@@ -12,7 +12,7 @@ const Accounts = () => {
 
     const [user, setUser] = useState()
     const [accounts, setAccounts] = useState([])
-    const [selectedAccount, setSelectedAccount] = useState()
+    const [selectedAccount, setSelectedAccount] = useState('')
 
     useEffect( () => {
 
@@ -55,8 +55,13 @@ const Accounts = () => {
         }
     
         getUserAccounts()
-    
+    // 
     }, [user])
+
+    const acchandleClick = (acc) => {
+        console.log("account clicked")
+        console.log(acc);
+    }
 
     if (!user) {
         return (
@@ -64,7 +69,36 @@ const Accounts = () => {
         )
     }
 
-    console.log(accounts[0])
+    const handleClick = (acc) => {
+
+        const cards = document.querySelectorAll('.account-card')
+        cards.forEach(card => {
+            card.classList.remove('selected-card')
+        })
+
+        console.log("clicked")
+        console.log(acc)
+
+        setSelectedAccount(acc)
+    }
+    
+    const AccountCard = (props) => {
+
+        const acc = {props}.props.acc
+
+        return (
+            <div className={acc == selectedAccount ? "selected-card" : "account-card"} onClick={() => {handleClick(acc)}}>
+                <img className='edit-icon' src={editIcon} />
+                <h2 className="acc-name">{props.name}</h2>
+                <p className="acc-num">XXXX XXXX XXXX {props.digits}</p>
+    
+                <div className="inner-card">
+                    <p className='rs-span'><span className='acc-rs'>Rs.</span><span className='acc-bal'>{props.balance}</span></p>
+                    <p className='balance'>BALANCE</p>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div>
@@ -72,7 +106,7 @@ const Accounts = () => {
             <div className="account-cards">
                 {accounts.map((acc)=>{
                     return (
-                    <AccountCard name={acc.name} digits={acc.digits} balance={acc.balance}/>
+                    <AccountCard acc={acc} name={acc.name} digits={acc.digits} balance={acc.balance} id={acc.id} onClick={() => acchandleClick(acc)}/>
                 );})}
             </div>
             <Link to="/addaccount" className="new-link">
