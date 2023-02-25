@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Profile from '../../Profile/Profile';
 import Sidebar from '../../Sidebar/Sidebar'
 import '../Auth.css'
 
@@ -9,14 +10,9 @@ const Login = () => {
 
     const dNow = Date.parse(new Date())
     const expiry = Date.parse(localStorage.getItem('expiry'))
-    console.log("now:" + dNow)
-    console.log("expiry:" + expiry)
     if (expiry < dNow) {
-        console.log('yes')
         localStorage.clear()
-    } else {
-        console.log('no')
-    }
+    } 
 
 
     const [user, setUser] = useState()
@@ -80,23 +76,10 @@ const Login = () => {
 
     }
 
-    const handleLogout = () => {
-        setUser({});
-        setEmail("");
-        setPassword("");
-        localStorage.clear();
-
-        window.location.reload(false);
-    };
-
 
     if (user) {
         return (
-            <div>
-                <h1>User Logged in</h1>
-                <button onClick={handleLogout}>Log out</button>
-                <Sidebar/>
-            </div>
+            <Profile/>
         )
     }
     

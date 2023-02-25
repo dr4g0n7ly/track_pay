@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '../../Sidebar/Sidebar'
 import AddAccount from "../../Accounts/AddAccount";
+import Profile from "../../Profile/Profile";
 import '../Auth.css'
 
 const EMAIL_REGEX = /(.+)@(.+){2,}\.(.+){2,}/
 const PWD_REGEX = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,16}$/
 
 const Register = () => {
+
+    const navigate = useNavigate();
 
     const [user, setUser] = useState()
 
@@ -88,9 +91,7 @@ const Register = () => {
 
             setSuccess(true)
 
-            return (
-                <AddAccount/>
-            )
+            navigate('/addaccount')
 
         } catch (error) {
             console.log(error)
@@ -98,21 +99,9 @@ const Register = () => {
         }
     }
 
-    const handleLogout = () => {
-        setUser({});
-        setEmail("");
-        setPassword("");
-        localStorage.clear();
-
-        window.location.reload(false);
-    };
-
     if (user) {
         return (
-            <div>
-                <h1>User Logged in</h1>
-                <button onClick={handleLogout}>Log out</button>
-            </div>
+            <Profile/>
         )
     }
 

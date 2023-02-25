@@ -4,11 +4,10 @@ const AccountSchema = require('../models/AccountSchema')
 const express = require('express')
 const router = express.Router()
 
-router.get('/getaccounts', async (req, res) => {
+router.post('/getaccounts', async (req, res) => {
     const { email } = req.body
 
     const user = await UserSchema.findOne({ email })
-
 
     const accounts = await Promise.all(
         user.accounts.map(async (accountID) => {
@@ -17,8 +16,8 @@ router.get('/getaccounts', async (req, res) => {
             return account
         })
     )
-    
-    res.json(accounts)
+
+    return res.json({ msg:"fetched all accounts successfully", accounts})
 
 })
 

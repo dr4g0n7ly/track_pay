@@ -22,7 +22,7 @@ const AddTransaction = () => {
     }, [amount])
 
     const handleClick1 = () => {
-
+        
     }
 
     const handleClick2 = () => {
@@ -62,9 +62,9 @@ const AddTransaction = () => {
                             <br/>
                             <br/>
                             <select>
-                                <option value="acc1">Acc1</option>
-                                <option value="acc2">Acc2</option>
-                                <option value="acc3">Savings</option>
+                                <option className="acc-opt" value="acc1">Acc1</option>
+                                <option className="acc-opt" value="acc2">Acc2</option>
+                                <option className="acc-opt" value="acc3">Savings</option>
                             </select>
                         </div>
 
@@ -80,7 +80,6 @@ const AddTransaction = () => {
                             <button className={style1} onClick={handleClick1}>Expense</button>
                             <button className={style2} onClick={handleClick2}>Income</button>
                         </div>
-
                         
 
                     <br/>

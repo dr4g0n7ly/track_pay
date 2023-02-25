@@ -3,6 +3,7 @@ import Register from './Components/Auth/Register/Register'
 import Login from './Components/Auth/Login/Login'
 import AddTransaction from './Components/AddTransaction/AddTransaction'
 import AddAccount from './Components/Accounts/AddAccount';
+import Accounts from './Components/Accounts/Accounts';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="/addtransaction" element={<AddTransaction/>} />
         <Route path="/addaccount" element={<AddAccount/>} />
+        <Route path="/accounts" element={<Accounts/>} />
       </Routes>
     </BrowserRouter>
   );

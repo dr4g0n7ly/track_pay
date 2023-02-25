@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Sidebar from "../Sidebar/Sidebar"
 import Login from "../Auth/Login/Login"
 import Accounts from "./Accounts"
@@ -6,19 +7,22 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './AddAccount.css'
 
+
+
 const AddAccount = () => {
 
     const [user, setUser] = useState()
 
     const [accName, setAccName] = useState('Account 1')
-    const [digits, setDigits] = useState()
+    const [digits, setDigits] = useState('')
     const [validDigits, setValidDigits] = useState(false)
     const [balance, setBalance] = useState()
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('user-email');
         if (loggedInUser) {
-            console.log(loggedInUser)
             setUser(loggedInUser)
         } else {
             setUser()
@@ -37,6 +41,13 @@ const AddAccount = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        if (digits === '') {
+            setDigits('XXXX')
+        }
+
+        const userEmail = user.replace(/['"]+/g, '')
+        console.log('email: ' + userEmail)
+
         try {
             const res = await fetch('/accounts/addaccount', {
                 method: 'POST',
@@ -44,7 +55,7 @@ const AddAccount = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    email: user,
+                    email: userEmail,
                     name: accName,
                     digits: digits,
                     balance: balance
@@ -58,18 +69,20 @@ const AddAccount = () => {
                 return console.log('res not ok - fetch error')
             }
 
-            setAccName('')
+            setAccName('New Account')
             setDigits('')
-            setBalance()
+            setValidDigits(false)
+            setBalance('')  
 
-            return (
-                <Accounts/>
-            )
+            navigate('/accounts')
 
         } catch (err) {
             console.log(err)
-            return console.log('fetch error')
+            toast('fetch error')
         }
+
+             
+
     }
 
     if (!user) {
@@ -102,7 +115,8 @@ const AddAccount = () => {
                 <br/>
                 <input
                     type="number"
-                    max="4"
+                    min="1000"
+                    max="9999"
                     placeholder="XXXX (optional)"
                     id="digits"
                     onChange={handleBalanceChange}
@@ -128,7 +142,7 @@ const AddAccount = () => {
                 <br/>
                 <br/>
 
-                <button disabled={!validDigits ? true : false}>
+                <button disabled={!validDigits || !balance? true : false}>
                     Create account
                 </button>
 

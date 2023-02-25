@@ -1,0 +1,28 @@
+.acc-h1{
+    margin-bottom: 0px;
+}
+
+.account-cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.new-link {
+    display: flex;
+}
+
+.new-link:hover {
+    filter: brightness(300);
+}
+
+.add-icon {
+    width: 40px;
+    height: auto;
+}
+
+.add-text {
+    color: rgb(138, 138, 138);
+    margin: auto;
+    margin-left: 20px;
+    margin-right: 0px;
+}

@@ -20,7 +20,7 @@ const Sidebar = (props) => {
                     <img src={icon1} alt='icon1' className={ props.icon === "1" ? 'active-icon' : 'icon'} />
                 </Link>
 
-                <Link to='/addaccount' className='icon-container'>
+                <Link to='/accounts' className='icon-container'>
                     <img src={icon2} alt='icon2' className={ props.icon === "2" ? 'active-icon' : 'icon'} />
                 </Link>
 
@@ -29,7 +29,7 @@ const Sidebar = (props) => {
                 </Link>
             </div>
 
-            <Link className='icon-container'>
+            <Link to='/' className='icon-container'>
                     <img src={iconp} alt='profile-icon' className={ props.icon === "profile" ? 'active-iconp' : 'iconp'} />
             </Link>
 
