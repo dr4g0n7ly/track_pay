@@ -9,7 +9,7 @@ import editIcon from "../../public/edit.png"
 import './Accounts.css'
 
 const Accounts = () => {
-    
+
     const [user, setUser] = useState()
     const [accounts, setAccounts] = useState([])
     const [selectedAccount, setSelectedAccount] = useState('')
@@ -84,6 +84,8 @@ const Accounts = () => {
                 const userEmail = user.replace(/['"]+/g, '')
                 const accID = selectedAccount._id
 
+                console.log(accID)
+
                 const res = await fetch('/transactions/gettransactions', {
                     method: 'POST',
                     headers: {
@@ -91,7 +93,7 @@ const Accounts = () => {
                     },
                     body: JSON.stringify({
                         email: userEmail,
-                        accout: accID,
+                        account: accID,
                     }),
                 })
     
