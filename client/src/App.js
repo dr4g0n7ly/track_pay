@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Register from './Components/Auth/Register/Register'
 import Login from './Components/Auth/Login/Login'
-import AddTransaction from './Components/AddTransaction/AddTransaction'
+import AddTransaction from './Components/Transactions/AddTransaction'
 import AddAccount from './Components/Accounts/AddAccount';
 import Accounts from './Components/Accounts/Accounts';
 

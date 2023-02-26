@@ -135,7 +135,7 @@ const AddTransaction = () => {
                 return console.log('res not ok - fetch error')
             }
 
-            // navigate('/accounts')
+            navigate('/accounts')
 
         } catch (err) {
             console.log(err)
