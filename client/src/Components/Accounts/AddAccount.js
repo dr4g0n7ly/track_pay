@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import './AddAccount.css'
 
 
-
 const AddAccount = () => {
 
     const [user, setUser] = useState()
@@ -45,8 +44,7 @@ const AddAccount = () => {
         }
 
         const userEmail = user.replace(/['"]+/g, '')
-        console.log('email: ' + userEmail)
-
+        
         try {
             const res = await fetch('/accounts/addaccount', {
                 method: 'POST',

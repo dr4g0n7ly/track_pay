@@ -11,7 +11,6 @@ router.post('/getaccounts', async (req, res) => {
 
     const accounts = await Promise.all(
         user.accounts.map(async (accountID) => {
-            console.log(accountID)
             const account = await AccountSchema.findById(accountID).exec()
             return account
         })
