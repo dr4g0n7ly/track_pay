@@ -58,11 +58,6 @@ const Accounts = () => {
     // 
     }, [user])
 
-    const acchandleClick = (acc) => {
-        console.log("account clicked")
-        console.log(acc);
-    }
-
     if (!user) {
         return (
             <Login/>
