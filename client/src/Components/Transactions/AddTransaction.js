@@ -8,6 +8,7 @@ import Login from "../Auth/Login/Login"
 
 import './AddTransaction.css'
 import "react-datepicker/dist/react-datepicker.css";
+import { mt } from "date-fns/locale";
 
 const NUMBER_REGEX = /^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/
 
@@ -18,7 +19,6 @@ const AddTransaction = () => {
     const [user, setUser] = useState()
     const [accounts, setAccounts] = useState([])
 
-    
     const [amount, setAmount] = useState(0)
     const [validAmount, setValidAmount] = useState(false)
 
@@ -27,6 +27,7 @@ const AddTransaction = () => {
     
     const [account, setAccount] = useState()
     const [date, setDate] = useState(new Date())
+    const [validDate, setValidDate] = useState(true)
     const [description, setDescription] = useState('')
     const [isExpense, setIsExpense] = useState(false)
     const [category, setCategory] = useState('')
@@ -45,18 +46,11 @@ const AddTransaction = () => {
 
             try {
                 const userEmail = user.replace(/['"]+/g, '')
-                const res = await fetch('/accounts/getaccounts', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email: userEmail,
-                    }),
-                })
+                const res = await fetch('accounts/getaccounts/' + userEmail)
     
                 const data = await res.json()
-                setAccounts(data.accounts)              
+                console.log(data)
+                setAccounts(data.accounts)
     
                 if (!res.ok) {
                     console.log('res not ok - fetch error')
@@ -80,6 +74,23 @@ const AddTransaction = () => {
         setValidAmount(result)
     }, [amount])
 
+    useEffect(() => {
+        const dToday = new Date().getDate()
+        const mToday = new Date().getMonth()
+        const yToday = new Date().getFullYear()
+        console.log(dToday, mToday, yToday)
+        const dDate = date.getDate()
+        const mDate = date.getMonth()
+        const yDate = date.getFullYear()
+        console.log(dDate)
+        if (dToday < dDate || mToday < mDate || yToday < yDate) {
+            setValidDate(false)
+        } else {
+            setDate(date)
+            setValidDate(true)
+        }
+    })
+
     const handleClick1 = () => {
         setStyle1('type-button-active-1')
         setStyle2('type-button')
@@ -91,21 +102,20 @@ const AddTransaction = () => {
         setStyle2('type-button-active-2')
         setIsExpense(false)
     }
-        console.log("set account: ", account)
 
     const handleSelectChange = () => {
-
         const selectElement = document.querySelector('#select')
         setAccount(selectElement.value)
-
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if (!description) {
-            setDescription('misc')
+        if (description == '') {
+            await setDescription('misc')
         }
+
+        console.log(description)
 
         const userEmail = user.replace(/['"]+/g, '')
         console.log("userEmail: ", userEmail)
@@ -178,7 +188,10 @@ const AddTransaction = () => {
                     <div className="row" style={{marginTop: "-48px"}}>
                         <div className="col1">
                             <label htmlFor="date" className="label">Select date:</label>
-                            <DatePicker id="date" className="datepicker" selected={date} onChange={(date) => setDate(date)} />
+                            <DatePicker id="date" className="datepicker" selected={date} onChange={(date) => {setDate(date)}} />
+                            <p className={!validDate ? "error" : "no-error"} style={{marginTop:"-12px"}}>
+                                Date cannot be a future date
+                            </p>
                         </div>
 
                         <div className="col2">

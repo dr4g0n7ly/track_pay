@@ -28,17 +28,10 @@ const Accounts = () => {
 
             try {
                 const userEmail = user.replace(/['"]+/g, '')
-                const res = await fetch('/accounts/getaccounts', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email: userEmail,
-                    }),
-                })
+                const res = await fetch('accounts/getaccounts/' + userEmail)
     
                 const data = await res.json()
+                console.log(data)
                 setAccounts(data.accounts)
     
                 if (!res.ok) {
@@ -79,18 +72,7 @@ const Accounts = () => {
                 const userEmail = user.replace(/['"]+/g, '')
                 const accID = selectedAccount._id
 
-                console.log(accID)
-
-                const res = await fetch('/transactions/gettransactions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email: userEmail,
-                        account: accID,
-                    }),
-                })
+                const res = await fetch('transactions/gettransactions/' + userEmail + '/' + accID)
     
                 const data = await res.json()
                 setTransactions(data.transactions)
@@ -132,7 +114,7 @@ const Accounts = () => {
 
     const Transactions = () => {
         if (transactions.length === 0) {
-            console.log("length = 0")
+            console.log("transactions = 0")
             return (
                 <div>
                     <p>Looks like you dont have any transactions</p>
@@ -140,8 +122,12 @@ const Accounts = () => {
                 </div>
             )
         } else {
+            console.log("transactions > 0")
             return (
-                <p>We have transactions</p>
+                <div>
+                    <p>Looks like you dont have any transactions</p>
+                    <p>Add a new transaction</p>
+                </div>
             )
         }
     }

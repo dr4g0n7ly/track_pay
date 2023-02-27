@@ -4,10 +4,12 @@ const AccountSchema = require('../models/AccountSchema')
 const express = require('express')
 const router = express.Router()
 
-router.post('/getaccounts', async (req, res) => {
-    const { email } = req.body
+router.get('/getaccounts/:user', async (req, res) => {
+
+    const email = req.params.user
 
     const user = await UserSchema.findOne({ email })
+
 
     const accounts = await Promise.all(
         user.accounts.map(async (accountID) => {

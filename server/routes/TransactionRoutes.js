@@ -5,8 +5,11 @@ const TransactionSchema = require('../models/TransactionSchema')
 const express = require('express')
 const router = express.Router()
 
-router.post('/gettransactions', async (req, res) => {
-    const { email, account } = req.body
+router.get('/gettransactions/:user/:account', async (req, res) => {
+    const email = req.params.user
+    const account = req.params.account
+
+    console.log( email, account)
 
     const user = await UserSchema.findOne({ email })
     if (!user) {
@@ -92,6 +95,7 @@ router.post('/addtransaction', async (req, res) => {
     }
 
     reqAccount.transactions.push(newTransaction)
+    // reqAccount.balance = currBalance
     const updatedAccount = await reqAccount.save()
 
     if (updatedAccount) {
