@@ -31,15 +31,27 @@ const Accounts = () => {
                 const res = await fetch('accounts/getaccounts/' + userEmail)
     
                 const data = await res.json()
-                console.log(data)
+                console.log(data.accounts)
+                
                 setAccounts(data.accounts)
-    
+                console.log(data)
+
+                setSelectedAccount( Object.values(data.accounts)[0])
+                console.log(data)
+                console.log(Object.values(data.accounts)[0])
+
                 if (!res.ok) {
                     console.log('res not ok - fetch error')
                 }
 
                 else {
-                    console.log('successfully fetched user accounts')
+                    const aux = (data) => {
+                        console.log("accounts: ", accounts)
+                        console.log(Object.values(accounts)[0])
+                        console.log("account 1: ", selectedAccount)
+                    }
+                    aux(data)
+                    console.log('successfully fetched user accounts')  
                 } 
     
             } catch (err) {
@@ -47,8 +59,8 @@ const Accounts = () => {
                 console.log('fetch error')
             }
         }
-        getUserAccounts()
-    // 
+        getUserAccounts() 
+
     }, [user])
 
     if (!user) {
@@ -57,35 +69,38 @@ const Accounts = () => {
         )
     }
 
-    const handleClick = (acc) => {
+    const handleClick = async (acc) => {
 
         const cards = document.querySelectorAll('.account-card')
         cards.forEach(card => {
             card.classList.remove('selected-card')
         })
 
-        setSelectedAccount(acc)
+        await setSelectedAccount(acc)
 
         const getAccountTransactions = async () => {
 
             try {
                 const userEmail = user.replace(/['"]+/g, '')
-                const accID = selectedAccount._id
+                const accID = selectedAccount.
+                
+                console.log(userEmail)
+                console.log(accID)
 
-                const res = await fetch('transactions/gettransactions/' + userEmail + '/' + accID)
+                // const res = await fetch('transactions/gettransactions/' + userEmail + '/' + accID)
     
-                const data = await res.json()
-                setTransactions(data.transactions)
-                console.log("transactions: ", transactions.length)
+                // const data = await res.json()
+                // setTransactions(data.transactions)
+                // console.log("no. of transactions: ", transactions.length)
 
-                if (!res.ok) {
-                    console.log('res not ok - fetch error')
-                }
+                // if (!res.ok) {
+                //     console.log('res not ok - fetch error')
+                // }
 
-                else {
-                    console.log('successfully fetched account transactions')
-                } 
-    
+                // else {
+                //     console.log('successfully fetched account transactions')
+                // } 
+                
             } catch (err) {
                 console.log(err)
                 console.log('fetch error')
@@ -114,7 +129,6 @@ const Accounts = () => {
 
     const Transactions = () => {
         if (transactions.length === 0) {
-            console.log("transactions = 0")
             return (
                 <div>
                     <p>Looks like you dont have any transactions</p>
@@ -122,10 +136,9 @@ const Accounts = () => {
                 </div>
             )
         } else {
-            console.log("transactions > 0")
             return (
                 <div>
-                    <p>Looks like you dont have any transactions</p>
+                    <p>You have transactions</p>
                     <p>Add a new transaction</p>
                 </div>
             )

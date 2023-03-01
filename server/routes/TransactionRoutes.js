@@ -38,7 +38,7 @@ router.get('/gettransactions/:user/:account', async (req, res) => {
             const transaction = await TransactionSchema.findById(transactionID).exec()
             return transaction
         })
-    )
+    ) 
 
     console.log(transactions)
 
@@ -95,7 +95,7 @@ router.post('/addtransaction', async (req, res) => {
     }
 
     reqAccount.transactions.push(newTransaction)
-    // reqAccount.balance = currBalance
+    reqAccount.balance = currBalance
     const updatedAccount = await reqAccount.save()
 
     if (updatedAccount) {
@@ -104,6 +104,6 @@ router.post('/addtransaction', async (req, res) => {
         return res.status(400).json({ msg: "Error updating account transactions" })
     }
     
-})
+}) 
 
 module.exports = router
