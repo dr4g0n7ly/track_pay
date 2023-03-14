@@ -31,14 +31,13 @@ const Accounts = () => {
                 const res = await fetch('accounts/getaccounts/' + userEmail)
     
                 const data = await res.json()
-                console.log(data.accounts)
+                console.log("data - accounts: ", data.accounts)
                 
                 setAccounts(data.accounts)
-                console.log(data)
 
                 setSelectedAccount( Object.values(data.accounts)[0])
-                console.log(data)
-                console.log(Object.values(data.accounts)[0])
+                console.log("data - account 1", Object.values(data.accounts)[0])
+
 
                 if (!res.ok) {
                     console.log('res not ok - fetch error')
@@ -47,8 +46,7 @@ const Accounts = () => {
                 else {
                     const aux = (data) => {
                         console.log("accounts: ", accounts)
-                        console.log(Object.values(accounts)[0])
-                        console.log("account 1: ", selectedAccount)
+                        console.log("selectedAccount: ", selectedAccount)
                     }
                     aux(data)
                     console.log('successfully fetched user accounts')  
@@ -82,7 +80,7 @@ const Accounts = () => {
 
             try {
                 const userEmail = user.replace(/['"]+/g, '')
-                const accID = selectedAccount.
+                const accID = selectedAccount
                 
                 console.log(userEmail)
                 console.log(accID)
@@ -165,5 +163,6 @@ const Accounts = () => {
         </div>
     )
 }
+
 
 export default Accounts
