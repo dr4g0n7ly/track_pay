@@ -12,15 +12,18 @@ router.get('/gettransactions/:user/:account', async (req, res) => {
     console.log(email)
     console.log(account)
 
-    // const user = await UserSchema.findOne({ email })
-    // if (!user) {
-    //     return res.status(400).json({ msg: "Invalid user email-id"})
-    // }
+    const user = await UserSchema.findOne({ email })
+    if (!user) {
+        return res.status(400).json({ msg: "Invalid user email-id"})
+    }
 
-    // const reqAccount = await AccountSchema.findById(account).exec()
-    // if (!reqAccount) {
-    //     return res.status(400).json({ msg: "Invalid account ID"})
-    // }
+    const reqAccount = await AccountSchema.findById(account).exec()
+    if (!reqAccount) {
+        return res.status(400).json({ msg: "Invalid account ID"})
+    }
+    else {
+        console.log("valid account id")
+    }
 
     // const accounts = await Promise.all(
     //     user.accounts.map(async (accountID) => {

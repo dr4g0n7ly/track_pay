@@ -31,13 +31,9 @@ const Accounts = () => {
                 const res = await fetch('accounts/getaccounts/' + userEmail)
     
                 const data = await res.json()
-                console.log("data - accounts: ", data.accounts)
                 
                 setAccounts(data.accounts)
-
-                setSelectedAccount( Object.values(data.accounts)[0])
-                console.log("data - account 1", Object.values(data.accounts)[0])
-
+                setSelectedAccount( Object.values(data.accounts)[0]._id)
 
                 if (!res.ok) {
                     console.log('res not ok - fetch error')
