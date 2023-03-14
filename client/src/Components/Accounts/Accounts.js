@@ -13,6 +13,7 @@ const Accounts = () => {
     const [user, setUser] = useState()
     const [accounts, setAccounts] = useState([])
     const [selectedAccount, setSelectedAccount] = useState('')
+    const [selectedAccountName, setSelectedAccountName] = useState('')
     const [transactions, setTransactions] = useState([])
 
     useEffect( () => {
@@ -33,7 +34,6 @@ const Accounts = () => {
                 const data = await res.json()
                 
                 setAccounts(data.accounts)
-                // setSelectedAccount( Object.values(data.accounts)[0]._id)
 
                 if (!res.ok) {
                     console.log('res not ok - fetch error')
@@ -63,7 +63,7 @@ const Accounts = () => {
         )
     }
 
-    const handleClick = async (acc) => {
+    const handleClick = async (acc, accName) => {
 
         const cards = document.querySelectorAll('.account-card')
         cards.forEach(card => {
@@ -71,6 +71,7 @@ const Accounts = () => {
         })
 
         await setSelectedAccount(acc)
+        await setSelectedAccountName(accName)
 
         const getAccountTransactions = async () => {
 
@@ -108,10 +109,9 @@ const Accounts = () => {
     const AccountCard = (props) => {
 
         const acc = {props}.props.acc
-        console.log(acc._id)
 
         return (
-            <div className={acc == selectedAccount ? "selected-card" : "account-card"} onClick={() => {handleClick(acc._id)}}>
+            <div className={acc == selectedAccount ? "selected-card" : "account-card"} onClick={() => {handleClick(acc._id, acc.name)}}>
                 <img className='edit-icon' src={editIcon} />
                 <h2 className="acc-name">{props.name}</h2>
                 <p className="acc-num">XXXX XXXX XXXX {props.digits}</p>
@@ -135,6 +135,7 @@ const Accounts = () => {
         } else if (transactions.length === 0) {
             return (
                 <div>
+                    <h3>{selectedAccountName}</h3>
                     <p>Looks like you dont have any transactions</p>
                     <p>Add a new transaction</p>
                 </div>
@@ -142,6 +143,7 @@ const Accounts = () => {
         } else {
             return (
                 <div>
+                    <h3>{selectedAccountName}</h3>
                     <p>You have transactions</p>
                     <p>Add a new transaction</p>
                 </div>
