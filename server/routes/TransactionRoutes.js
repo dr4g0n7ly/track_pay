@@ -2,28 +2,30 @@ const UserSchema = require('../models/UserSchema')
 const AccountSchema = require('../models/AccountSchema')
 const TransactionSchema = require('../models/TransactionSchema')
 
+const mongoose = require('mongoose')
 const express = require('express')
 const router = express.Router()
 
 router.get('/gettransactions/:user/:account', async (req, res) => {
     const email = req.params.user
-    const account = req.params.account
+    const accountString = req.params.account
+    // const account = mongoose.Types.ObjectId(accountString)
 
     console.log(email)
-    console.log(account)
+    console.log(accountString)
 
     const user = await UserSchema.findOne({ email })
     if (!user) {
         return res.status(400).json({ msg: "Invalid user email-id"})
     }
 
-    const reqAccount = await AccountSchema.findById(account).exec()
-    if (!reqAccount) {
-        return res.status(400).json({ msg: "Invalid account ID"})
-    }
-    else {
-        console.log("valid account id")
-    }
+    // const reqAccount = await AccountSchema.findById(account).exec()
+    // if (!reqAccount) {
+    //     return res.status(400).json({ msg: "Invalid account ID"})
+    // }
+    // else {
+    //     console.log("valid account id")
+    // }
 
     // const accounts = await Promise.all(
     //     user.accounts.map(async (accountID) => {
