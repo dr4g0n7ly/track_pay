@@ -106,9 +106,10 @@ const Accounts = () => {
     const AccountCard = (props) => {
 
         const acc = {props}.props.acc
+        console.log(acc._id)
 
         return (
-            <div className={acc == selectedAccount ? "selected-card" : "account-card"} onClick={() => {handleClick(acc)}}>
+            <div className={acc == selectedAccount ? "selected-card" : "account-card"} onClick={() => {handleClick(acc._id)}}>
                 <img className='edit-icon' src={editIcon} />
                 <h2 className="acc-name">{props.name}</h2>
                 <p className="acc-num">XXXX XXXX XXXX {props.digits}</p>
