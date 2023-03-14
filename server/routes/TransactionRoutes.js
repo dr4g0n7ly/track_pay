@@ -9,40 +9,42 @@ router.get('/gettransactions/:user/:account', async (req, res) => {
     const email = req.params.user
     const account = req.params.account
 
-    console.log( email, account)
+    console.log(email)
+    console.log(account)
 
-    const user = await UserSchema.findOne({ email })
-    if (!user) {
-        return res.status(400).json({ msg: "Invalid user email-id"})
-    }
+    // const user = await UserSchema.findOne({ email })
+    // if (!user) {
+    //     return res.status(400).json({ msg: "Invalid user email-id"})
+    // }
 
-    const reqAccount = await AccountSchema.findById(account).exec()
-    if (!reqAccount) {
-        return res.status(400).json({ msg: "Invalid account ID"})
-    }
+    // const reqAccount = await AccountSchema.findById(account).exec()
+    // if (!reqAccount) {
+    //     return res.status(400).json({ msg: "Invalid account ID"})
+    // }
 
-    const accounts = await Promise.all(
-        user.accounts.map(async (accountID) => {
-            const account = await AccountSchema.findById(accountID).exec()
-            return account
-        })
-    )
+    // const accounts = await Promise.all(
+    //     user.accounts.map(async (accountID) => {
+    //         const account = await AccountSchema.findById(accountID).exec()
+    //         return account
+    //     })
+    // )
 
-    if (! reqAccount in accounts ) {
-        return res.status(400).json({ msg: "Account ID not matching user accounts"})
-    } 
+    // if (! reqAccount in accounts ) {
+    //     return res.status(400).json({ msg: "Account ID not matching user accounts"})
+    // } 
 
-    const transactions = await Promise.all(
-        reqAccount.transactions.map(async (transactionID) => {
-            console.log(transactionID)
-            const transaction = await TransactionSchema.findById(transactionID).exec()
-            return transaction
-        })
-    ) 
+    // const transactions = await Promise.all(
+    //     reqAccount.transactions.map(async (transactionID) => {
+    //         console.log(transactionID)
+    //         const transaction = await TransactionSchema.findById(transactionID).exec()
+    //         return transaction
+    //     })
+    // ) 
 
-    console.log(transactions)
+    // console.log(transactions)
 
-    return res.json({ msg:"fetched account transactions successfully", transactions})
+    return res.json({ msg:"fetched account transactions successfully"})
+    // return res.json({ msg:"fetched account transactions successfully", transactions})
 })
 
 router.post('/addtransaction', async (req, res) => {
