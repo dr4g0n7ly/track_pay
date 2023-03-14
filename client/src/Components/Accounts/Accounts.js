@@ -33,7 +33,7 @@ const Accounts = () => {
                 const data = await res.json()
                 
                 setAccounts(data.accounts)
-                setSelectedAccount( Object.values(data.accounts)[0]._id)
+                // setSelectedAccount( Object.values(data.accounts)[0]._id)
 
                 if (!res.ok) {
                     console.log('res not ok - fetch error')
