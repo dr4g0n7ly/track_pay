@@ -84,7 +84,9 @@ const Accounts = () => {
                 const res = await fetch('transactions/gettransactions/' + userEmail + '/' + accID)
                 const data = await res.json()
 
-                setTransactions("transactions data: " + data)
+                console.log("transactions: ", data.transactions)
+
+                setTransactions(data.transactions)
                 console.log("no. of transactions: ", transactions.length)
 
                 if (!res.ok) {
