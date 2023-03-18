@@ -133,7 +133,17 @@ const Accounts = () => {
         )
     }
 
+    function groupByDate(array, property) {
+        return array.reduce(function(groups, item) {
+            var name = item[property]
+            var group = groups[name] || (groups[name] = [])
+            group.push(item)
+            return groups
+        }, { })
+    }
+
     const Transactions = () => {
+
         if (selectedAccount === null) {
             return (
                 <div>
