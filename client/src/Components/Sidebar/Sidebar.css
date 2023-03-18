@@ -69,6 +69,8 @@ img {
         border-right: 0px;
 
         background-color: black;
+
+        min-width: 300px;
     }
 
     .logo {
