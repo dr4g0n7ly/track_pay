@@ -49,3 +49,46 @@ img {
     margin-left: 22px;
     padding-top: 200px;
 }
+
+@media only screen and (max-width: 600px) {
+
+    .Sidebar {
+        padding-top: 4px;
+
+        position: absolute;
+        margin-top: 90vh;
+        margin-bottom: 1px;
+
+        display: flex;
+        justify-content: space-between;
+    
+        /* z-index: 2; */
+        width: 100%;
+        height: 64px;
+        border-top: 1px solid white;
+        border-right: 0px;
+
+        background-color: black;
+    }
+
+    .logo {
+        margin: 0;
+        padding: 0;
+        width: 56px;
+        margin-left: 8px;
+        margin-top: 4px;
+    }
+
+    .side-links {
+        padding: 0px;
+        margin: 0px;
+        margin-top: 0px;
+    } 
+
+    .iconp {
+        margin-left: 0px;
+        padding-top: 0px;
+        margin-right: 10px;
+    }
+
+}
