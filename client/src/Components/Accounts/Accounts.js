@@ -149,14 +149,14 @@ const Accounts = () => {
         if (selectedAccount === null) {
             return (
                 <div>
-                    <p>Please select an account to see transactions</p>
+                    <p className="trans-head">Please select an account to see transactions</p>
                     <p>Add a new transaction</p>
                 </div>
             )
         } else if (transactions.length === 0) {
             return (
                 <div>
-                    <h3>{selectedAccountName}</h3>
+                    <p className="trans-head">{selectedAccountName}</p>
                     <p>Looks like you dont have any transactions</p>
                     <p>Add a new transaction</p>
                 </div>
@@ -172,7 +172,7 @@ const Accounts = () => {
                 console.log(groups[date])
                 results.push (
                     <div key={index}>
-                        <p>{date}</p>
+                        <p className="trans-date">{date}</p>
                         { groups[date].map((transaction) => {
                             return (
                                 <TransactionCard desc={transaction.description} amount={transaction.amount} balance={transaction.currBalance} />
@@ -184,7 +184,7 @@ const Accounts = () => {
             
             return (
                 <div className="transactions">
-                    <p>{selectedAccountName} Transactions</p>
+                    <p className="trans-head">{selectedAccountName} Transactions</p>
                     { results }                   
                     <p>Add a new transaction</p>
                 </div>
@@ -205,9 +205,8 @@ const Accounts = () => {
                 <img src={addIcon} className="add-icon"/>
                 <p className="add-text">Create new Account?</p>
             </Link>
-            <Sidebar icon="2"/>
-
             <Transactions/>
+            <Sidebar icon="2"/>
         </div>
     )
 }
