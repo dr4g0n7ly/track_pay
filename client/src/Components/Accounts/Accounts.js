@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
-import addIcon from "../../public/newAccount.png"
 import Sidebar from "../Sidebar/Sidebar";
 import Login from "../Auth/Login/Login";
 import editIcon from "../../public/edit.png"
+import addIcon from "../../public/newAccount.png"
+import transIcon from "../../public/icon1.png"
 
 import './Accounts.css'
 
@@ -126,9 +127,13 @@ const Accounts = () => {
     const TransactionCard = (props) => {
         return (
             <div className="transaction-card">
-                <p>{props.desc}</p>
-                <p>{props.amount}</p>
-                <p>{props.balance}</p>
+                <p className="trans-card-desc">{props.desc}</p>
+                {props.isExpense === true ? (
+                    <p className="trans-card-amt-sub">- Rs. {props.amount}</p>
+                ):(
+                    <p className="trans-card-amt-add">+ Rs. {props.amount}</p>
+                ) }
+                <p className="trans-card-balance">Rs. {props.balance}</p>
             </div>
         )
     }
@@ -150,7 +155,6 @@ const Accounts = () => {
             return (
                 <div>
                     <p className="trans-head">Please select an account to see transactions</p>
-                    <p>Add a new transaction</p>
                 </div>
             )
         } else if (transactions.length === 0) {
@@ -158,7 +162,6 @@ const Accounts = () => {
                 <div>
                     <p className="trans-head">{selectedAccountName}</p>
                     <p>Looks like you dont have any transactions</p>
-                    <p>Add a new transaction</p>
                 </div>
             )
         } else {
@@ -175,7 +178,7 @@ const Accounts = () => {
                         <p className="trans-date">{date}</p>
                         { groups[date].map((transaction) => {
                             return (
-                                <TransactionCard desc={transaction.description} amount={transaction.amount} balance={transaction.currBalance} />
+                                <TransactionCard desc={transaction.description} amount={transaction.amount} balance={transaction.currBalance} isExpense={transaction.isExpense} />
                             )
                         })}
                     </div>
@@ -186,7 +189,6 @@ const Accounts = () => {
                 <div className="transactions">
                     <p className="trans-head">{selectedAccountName} Transactions</p>
                     { results }                   
-                    <p>Add a new transaction</p>
                 </div>
             )
         }
@@ -207,6 +209,11 @@ const Accounts = () => {
             </Link>
             <Transactions/>
             <Sidebar icon="2"/>
+            <Link to="/addtransaction" className="new-link">
+                <img src={transIcon} className="trans-icon"/>
+                <p className="add-text">Add new Transaction?</p>
+            </Link>
+
         </div>
     )
 }

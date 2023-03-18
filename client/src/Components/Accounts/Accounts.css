@@ -116,6 +116,7 @@
 }
 
 .trans-head {
+    margin-top: 44px;
     font-size: 20px;
     font-weight: 500;
     color: #b0b0b0;
@@ -131,4 +132,30 @@
     padding-left: 12px;
     height: 48px;
     padding-top: -8px;
+}
+
+.trans-date {
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 28px;
+    color: #b0b0b0;
+}
+
+.trans-card-desc, .trans-card-amt-sub, .trans-card-amt-add, .trans-card-balance {
+    font-size: 14px;
+    margin-left: 24px;
+    color: rgb(249, 249, 249);
+    font-weight: 500;
+}
+
+.trans-card-amt-add {
+    color: #B2FFBA;
+}
+
+.trans-card-amt-sub {
+    color: #FFB2B6;
+}
+
+.trans-icon {
+    width: 44px;
 }
