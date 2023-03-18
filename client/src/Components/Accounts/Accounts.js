@@ -133,9 +133,11 @@ const Accounts = () => {
         )
     }
 
-    function groupByDate(array, property) {
+    function groupByDate(array) {
         return array.reduce(function(groups, item) {
-            var name = item[property]
+            var date = item['date']
+            var name = date.slice(0, date.indexOf('T'))
+            console.log("date: " + name)
             var group = groups[name] || (groups[name] = [])
             group.push(item)
             return groups
@@ -160,6 +162,10 @@ const Accounts = () => {
                 </div>
             )
         } else {
+
+            var groups = groupByDate(transactions);
+            console.log('groups:' + JSON.stringify(groups))
+            
             return (
                 <div className="transactions">
                     <h3>{selectedAccountName}</h3>
@@ -171,6 +177,7 @@ const Accounts = () => {
                         )
                     })
                     }
+                    <br/>                     
                     <p>Add a new transaction</p>
                 </div>
             )
