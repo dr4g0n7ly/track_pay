@@ -5,6 +5,8 @@ import AddTransaction from './Components/Transactions/AddTransaction'
 import AddAccount from './Components/Accounts/AddAccount';
 import Accounts from './Components/Accounts/Accounts';
 
+import './App.css'
+
 
 function App() {
 
