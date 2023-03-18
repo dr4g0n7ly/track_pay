@@ -85,9 +85,8 @@ const Accounts = () => {
                 const res = await fetch('transactions/gettransactions/' + userEmail + '/' + accID)
                 const data = await res.json()
 
-                console.log("transactions: ", data.transactions)
-
                 setTransactions(data.transactions)
+                console.log("transactions: ", transactions)
                 console.log("no. of transactions: ", transactions.length)
 
                 if (!res.ok) {
@@ -124,6 +123,16 @@ const Accounts = () => {
         )
     }
 
+    const TransactionCard = (props) => {
+        return (
+            <div className="transaction-card">
+                <h5>{props.desc}</h5>
+                <h5>{props.amount}</h5>
+                <h5>{props.balance}</h5>
+            </div>
+        )
+    }
+
     const Transactions = () => {
         if (selectedAccount === null) {
             return (
@@ -142,9 +151,16 @@ const Accounts = () => {
             )
         } else {
             return (
-                <div>
+                <div className="transactions">
                     <h3>{selectedAccountName}</h3>
-                    <p>You have transactions</p>
+                    {transactions.map((transaction) => {
+                        return (
+                            <div>
+                                <TransactionCard desc={transaction.description} amount={transaction.amount} balance={transaction.currBalance} />
+                            </div>
+                        )
+                    })
+                    }
                     <p>Add a new transaction</p>
                 </div>
             )

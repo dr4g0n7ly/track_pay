@@ -111,3 +111,11 @@
 .edit-icon:hover {
     filter: brightness(300%);
 }
+
+.transaction-card {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr;
+    background-color: #1A1A1A;
+    width: 100%;
+    margin: 20px;
+}
