@@ -162,7 +162,7 @@ const AddTransaction = () => {
     return (
         <section>
             <ToastContainer/>
-            <h1>Add transaction</h1>
+            <h1 className="trans-h1">Add transaction</h1>
             <div>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="amount" className="label">Enter amount:</label>
