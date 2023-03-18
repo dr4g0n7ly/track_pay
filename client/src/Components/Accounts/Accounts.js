@@ -126,9 +126,9 @@ const Accounts = () => {
     const TransactionCard = (props) => {
         return (
             <div className="transaction-card">
-                <h5>{props.desc}</h5>
-                <h5>{props.amount}</h5>
-                <h5>{props.balance}</h5>
+                <p>{props.desc}</p>
+                <p>{props.amount}</p>
+                <p>{props.balance}</p>
             </div>
         )
     }
@@ -165,19 +165,27 @@ const Accounts = () => {
 
             var groups = groupByDate(transactions);
             console.log('groups:' + JSON.stringify(groups))
+
+            const results = []
+
+            Object.keys(groups).forEach((date, index) => {
+                console.log(groups[date])
+                results.push (
+                    <div key={index}>
+                        <p>{date}</p>
+                        { groups[date].map((transaction) => {
+                            return (
+                                <TransactionCard desc={transaction.description} amount={transaction.amount} balance={transaction.currBalance} />
+                            )
+                        })}
+                    </div>
+                )
+            })
             
             return (
                 <div className="transactions">
-                    <h3>{selectedAccountName}</h3>
-                    {transactions.map((transaction) => {
-                        return (
-                            <div>
-                                <TransactionCard desc={transaction.description} amount={transaction.amount} balance={transaction.currBalance} />
-                            </div>
-                        )
-                    })
-                    }
-                    <br/>                     
+                    <p>{selectedAccountName} Transactions</p>
+                    { results }                   
                     <p>Add a new transaction</p>
                 </div>
             )
@@ -199,7 +207,6 @@ const Accounts = () => {
             </Link>
             <Sidebar icon="2"/>
 
-            <h2 className="trans-h2">Transactions</h2>
             <Transactions/>
         </div>
     )
