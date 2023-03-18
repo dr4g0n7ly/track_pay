@@ -1,0 +1,18 @@
+body {
+    margin: 40px 100px 0px 150px;
+    font-family: 'Work Sans', sans-serif;
+    color:rgb(200, 200, 200);
+    background-color: #141414;
+
+    min-width: 480px;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+
+    body {
+        margin: 20px 40px 0px 40px;
+    }
+
+}
