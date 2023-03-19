@@ -11,7 +11,8 @@
 }
 
 .logo {
-    width: 40px;
+    width: 52px;
+    margin-left: 12px;
 }
 
 .side-links {
@@ -61,7 +62,7 @@ img {
 
         position: fixed;
         margin-top: 90vh;
-        margin-bottom: 1px;
+        margin-bottom: 0px;
 
         display: flex;
         justify-content: space-between;
@@ -78,7 +79,7 @@ img {
     .logo {
         margin: 0;
         padding: 0;
-        width: 56px;
+        width: 52px;
         margin-left: 8px;
         margin-top: 4px;
     }
