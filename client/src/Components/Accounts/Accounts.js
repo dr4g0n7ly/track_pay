@@ -127,6 +127,7 @@ const Accounts = () => {
     const TransactionCard = (props) => {
         return (
             <div className="transaction-card">
+                <img className='trans-edit-icon' src={editIcon} />
                 <p className="trans-card-desc">{props.desc}</p>
                 {props.isExpense === true ? (
                     <p className="trans-card-amt-sub">- Rs. {props.amount}</p>

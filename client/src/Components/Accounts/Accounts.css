@@ -124,7 +124,7 @@
 
 .transaction-card {
     display: grid;
-    grid-template-columns: 2.5fr 1fr 1fr;
+    grid-template-columns: 24px 2.5fr 1fr 1fr;
     background-color: #1A1A1A;
     width: 95%;
     margin-top: 10px;
@@ -134,11 +134,26 @@
     padding-top: -8px;
 }
 
+.transaction-card:hover .trans-edit-icon {
+    visibility: visible;
+}
+
 .trans-date {
     font-size: 12px;
     font-weight: 700;
     margin-top: 28px;
     color: #b0b0b0;
+}
+
+.trans-edit-icon {
+    margin-top: 10px;
+    width: 20px;
+    filter: brightness(25%);
+    visibility: hidden;
+}
+.trans-edit-icon:hover {
+    visibility: visible;
+    filter: brightness(300%);
 }
 
 .trans-card-desc, .trans-card-amt-sub, .trans-card-amt-add, .trans-card-balance {
@@ -154,6 +169,10 @@
 
 .trans-card-amt-sub {
     color: #FFB2B6;
+}
+
+.trans-card-balance {
+    margin-right: 24px;
 }
 
 .trans-icon {

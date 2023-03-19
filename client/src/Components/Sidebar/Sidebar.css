@@ -55,7 +55,7 @@ img {
     .Sidebar {
         padding-top: 4px;
 
-        position: absolute;
+        position: fixed;
         margin-top: 90vh;
         margin-bottom: 1px;
 
@@ -68,9 +68,7 @@ img {
         border-top: 1px solid white;
         border-right: 0px;
 
-        background-color: black;
-
-        min-width: 300px;
+        background-color: #141414;
     }
 
     .logo {
