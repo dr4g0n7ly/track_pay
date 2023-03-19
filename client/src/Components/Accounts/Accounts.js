@@ -79,16 +79,12 @@ const Accounts = () => {
             try {
                 const userEmail = user.replace(/['"]+/g, '')
                 const accID = selectedAccount
-                
-                console.log(userEmail)
-                console.log(accID)
 
                 const res = await fetch('transactions/gettransactions/' + userEmail + '/' + accID)
                 const data = await res.json()
 
                 setTransactions(data.transactions)
                 console.log("transactions: ", transactions)
-                console.log("no. of transactions: ", transactions.length)
 
                 if (!res.ok) {
                     console.log('res not ok - fetch error')
@@ -143,7 +139,6 @@ const Accounts = () => {
         return array.reduce(function(groups, item) {
             var date = item['date']
             var name = date.slice(0, date.indexOf('T'))
-            console.log("date: " + name)
             var group = groups[name] || (groups[name] = [])
             group.push(item)
             return groups
@@ -168,12 +163,9 @@ const Accounts = () => {
         } else {
 
             var groups = groupByDate(transactions);
-            console.log('groups:' + JSON.stringify(groups))
-
             const results = []
 
             Object.keys(groups).forEach((date, index) => {
-                console.log(groups[date])
                 results.push (
                     <div key={index}>
                         <p className="trans-date">{date}</p>
