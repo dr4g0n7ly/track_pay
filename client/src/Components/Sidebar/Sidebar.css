@@ -10,6 +10,10 @@
     border-right: 1px solid white;
 }
 
+.logo {
+    width: 40px;
+}
+
 .side-links {
     padding-top: 40px;
     margin-top: 80px;

@@ -54,6 +54,7 @@ const Accounts = () => {
                 console.log('fetch error')
             }
         }
+
         getUserAccounts() 
 
     }, [user])
@@ -147,7 +148,7 @@ const Accounts = () => {
 
     const Transactions = () => {
 
-        if (selectedAccount === null) {
+        if (!selectedAccount) {
             return (
                 <div>
                     <p className="trans-head">Please select an account to see transactions</p>
